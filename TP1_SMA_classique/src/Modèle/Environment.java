@@ -20,6 +20,8 @@ public class Environment {
 	int seed;
 	int refresh;
 	int nbParticles;
+	//Tableaux 2D
+	private int Agent[][];
 	
 	/*Fonctions*/
 	
@@ -40,4 +42,11 @@ public class Environment {
 		return gridSizeY;
 	}
 	
+	public void setNbParticles(int nbParticles) {
+		this.nbParticles = nbParticles;
+	}
+	
+	public int getNbParticles() {
+		return nbParticles;
+	}
 }
