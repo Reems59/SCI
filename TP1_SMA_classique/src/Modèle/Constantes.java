@@ -1,4 +1,4 @@
-package ModÃ¨le;
+package Modèle;
 
 import java.util.ArrayList;
 
