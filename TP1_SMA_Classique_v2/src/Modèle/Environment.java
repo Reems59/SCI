@@ -6,6 +6,11 @@
 
 package Modèle;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 public class Environment {
 
 
@@ -21,10 +26,23 @@ public class Environment {
 		return agents;
 	}
 	public void fillAgents(){
+		ArrayList<int[]> directions = Parameters.directions;
+		Collections.shuffle(directions);
+
 		for(int k = 0; k< Parameters.nbParticles; k++){
-			
+			int x = (int) (Math.random() * Parameters.gridSizeX);
+			int y = (int) (Math.random() * Parameters.gridSizeY);
+			while(agents[x][y] != null){
+				x =(int) (Math.random() * Parameters.gridSizeX);
+				y = (int) (Math.random() * Parameters.gridSizeY);
+			}
+			agents[x][y] = new Agent(directions.get(0),new Color((float)Math.random(),
+					(float)Math.random(),(float)Math.random()));
+			Collections.shuffle(directions);
 		}
 	}
+
+
 }
 
 //public Environment(Agent[][] agents

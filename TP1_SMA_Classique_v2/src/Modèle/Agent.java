@@ -10,7 +10,7 @@ import java.awt.Color;
 public class Agent {
 	/*Variables*/
 	private int[] state = new int[2];
-	private Color c ;
+	private Color color ;
 	void update(Pair p){
 		
 		p.setX(p.getX() + state[0]);
@@ -19,7 +19,7 @@ public class Agent {
 
 	public Agent(int[] state, Color c){
 		this.state = state;
-		this.c = c;
+		this.color = c;
 	}
 	Pair decide(Agent[] voisins, Pair p){
 		Pair coordAgent = p;
@@ -46,6 +46,10 @@ public class Agent {
 		}
 		return coordAgent;
 
+	}
+
+	public Color getColor() {
+		return color;
 	}
 
 	private int[] getState() {

@@ -17,25 +17,30 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Modèle.Environment;
+import Modèle.Parameters;
 import Modèle.SMA;
 
 public class Vue extends JFrame implements Observer{
 	private static final long serialVersionUID = 1L;
 	private Grid grid;
 
-	public Vue(){
+	public Vue(Environment e){
 		
-		grid = new Grid();
+		
 		setTitle("grille de billes");
-		getContentPane().add(grid);
+		grid = new Grid(e);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setResizable(false);
-		pack();
+		setSize(Parameters.boxSize * Parameters.gridSizeX +17, Parameters.boxSize * Parameters.gridSizeY+40);
+		setResizable(true);
+		setContentPane(grid);
+		//pack();
 		setVisible(true);
 	}
 	public void update(Observable o, Object arg) {
+		System.out.println("je passe updtate vue");
 		if(o instanceof SMA)
-			grid.update(o, getGraphics());
+			grid.repaint();
 	}
 
 }

@@ -15,12 +15,12 @@ public class SMA extends Observable{
 	protected Vue v;
 	
 	public SMA(){
-		v = new Vue();
 		environment =  new Environment();
+		v = new Vue(environment);
 		this.addObserver(v);
 	}
 	void run(){
-
+		
 
 	}
 	public Environment getEnvironment() {
