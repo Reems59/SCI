@@ -7,6 +7,6 @@ package Modèle;
 
 public class Main {
     public static void main (String [] arg){
-    	Vue v = new Vue();
+    	Vue v = new Vue(500, 500);
     }
 }
