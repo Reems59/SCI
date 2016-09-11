@@ -16,9 +16,11 @@ public class Environment {
 
 	//Tableau d'agents
 	private Agent agents[][];
+	private ArrayList<Agent> listAgents;
 
 	public Environment(){
 		agents = new Agent[Parameters.gridSizeX][Parameters.gridSizeY];
+		listAgents = new ArrayList<Agent>();
 		fillAgents();
 	}
 
@@ -37,10 +39,16 @@ public class Environment {
 				y = (int) (Math.random() * Parameters.gridSizeY);
 			}
 			agents[x][y] = new Agent(directions.get(0),new Color((float)Math.random(),
-					(float)Math.random(),(float)Math.random()));
+					(float)Math.random(),(float)Math.random()), new Pair(x, y));
+			listAgents.add(agents[x][y]);
 			Collections.shuffle(directions);
 		}
 	}
+
+	public ArrayList<Agent> getListAgents() {
+		return listAgents;
+	}
+	
 
 
 }

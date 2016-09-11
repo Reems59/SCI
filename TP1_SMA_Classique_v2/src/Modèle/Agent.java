@@ -9,52 +9,58 @@ import java.awt.Color;
 
 public class Agent {
 	/*Variables*/
-	private int[] state = new int[2];
+	private int[] direction = new int[2];
+	private Pair p;
 	private Color color ;
-	void update(Pair p){
-		
-		p.setX(p.getX() + state[0]);
-		p.setY(p.getY() + state[1]);
+	void update(){
+
+		p.setX(p.getX() + direction[0]);
+		p.setY(p.getY() + direction[1]);
 	}
 
-	public Agent(int[] state, Color c){
-		this.state = state;
+	public Agent(int[] state, Color c, Pair pair){
+		this.direction = state;
 		this.color = c;
+		this.p = pair;
 	}
-	Pair decide(Agent[] voisins, Pair p){
+	//refaire la méthode pour mettre une listes de 3 agents (l'un est la futur case en fonction de la direction et
+	//l'autre est la case qui peut aller si il tape un mur ou une bille pour tester si il y a une bille et l'opposé
+
+	public void decide(Agent[] voisins){
 		Pair coordAgent = p;
-		for(int i=0; i<8; i++){
-			if(state == Parameters.directions.get(i)){
-				if(voisins[i].getState() == Parameters.mur)
-					if(voisins[i+4].getState() == Parameters.vide){
-						move_inverse(Parameters.directions.get(i));
-						update(coordAgent);
-					}else{
-						move_inverse(Parameters.directions.get(i));
-					}
-				else if(voisins[i].getState() == Parameters.vide){
-					update(coordAgent);
-				}
-				else 
-					echange_direction();
-				if(voisins[i+4].getState() == Parameters.vide){
-					update(coordAgent);
-				}
-				break;
+		if(voisins[0].getDirection() == Parameters.mur)
+			if(voisins[1].getDirection() == Parameters.vide){
+				move_inverse(voisins[0].getDirection());
+				update();
+			}else{
+				move_inverse(voisins[0].getDirection());
+				echange_direction();
 			}
-
+		else if(voisins[0].getDirection() == Parameters.vide){
+			update();
 		}
-		return coordAgent;
+		else 
+			echange_direction();
+			if(voisins[1].getDirection() == Parameters.vide){
+				update();
+			}else{
+				echange_direction();
+		}
 
+	}
+
+
+	public Pair getP() {
+		return p;
 	}
 
 	public Color getColor() {
 		return color;
 	}
 
-	private int[] getState() {
+	protected int[] getDirection() {
 		// TODO Auto-generated method stub
-		return state;
+		return direction;
 	}
 
 	/*Actions*/
@@ -94,20 +100,20 @@ public class Agent {
 	}
 	 */
 	protected void echange_direction() {
-		int state2 = state[0];
-		state[0] = state[1];
-		state[1] = state2;
+		int state2 = direction[0];
+		direction[0] = direction[1];
+		direction[1] = state2;
 	}
 	protected void move_inverse(int[] direction) {
 		if(direction[0] == 1){
-			state[0] = -1;
+			direction[0] = -1;
 		}else if (direction[0] == -1){
-			state[0] = 1;
+			direction[0] = 1;
 		}
 		if(direction[1] == 1){
-			state[1] = -1;
+			direction[1] = -1;
 		}else if (direction[1] == -1){
-			state[1] = 1;
+			direction[1] = 1;
 		}
 	}
 
